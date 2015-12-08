@@ -26,7 +26,8 @@ var Carousel = React.createClass({
     style: View.propTypes.style,
     pageStyle: View.propTypes.style,
     contentContainerStyle: View.propTypes.style,
-    autoplay: React.PropTypes.bool
+    autoplay: React.PropTypes.bool,
+    onPageChange: React.PropTypes.func
   },
   mixins: [TimerMixin],
   getDefaultProps: function() {
@@ -104,6 +105,7 @@ var Carousel = React.createClass({
     var size = this.state.size;
     var page = Math.floor((offset - size.width/2) / size.width) + 1;
     this.setState({currentPage: page});
+    if (this.props.onPageChange) this.props.onPageChange(page);
   },
   //TODO: add optional `dots` for displaying current page (like pageControl)
   render: function() {
